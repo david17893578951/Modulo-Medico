@@ -1,6 +1,7 @@
 plugins {
-	id 'org.springframework.boot' version '2.1.7.RELEASE'
-	id 'java'
+  id 'org.springframework.boot' version '2.1.8.RELEASE'
+  id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+  id 'java'
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -24,7 +25,8 @@ repositories {
 }
 
 ext {
-	set('springCloudVersion', "Greenwich.SR2")
+	set('springCloudServicesVersion', "2.1.4.RELEASE")
+  	set('springCloudVersion', "Greenwich.SR2")
 }
 
 dependencies {
@@ -46,6 +48,7 @@ dependencies {
 
 dependencyManagement {
 	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+		mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:${springCloudServicesVersion}"
+   		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
 }
