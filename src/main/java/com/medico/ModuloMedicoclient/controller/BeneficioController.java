@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.medico.ModuloMedicoclient.model.Beneficio;
 import com.medico.ModuloMedicoclient.repository.BeneficioRepo;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-//import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @RestController
 @RequestMapping("/beneficio")

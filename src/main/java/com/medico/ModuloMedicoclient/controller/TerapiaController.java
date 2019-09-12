@@ -39,7 +39,6 @@ public class TerapiaController {
 			f1 = formato.parse(fechaIni);
 			f2 = formato.parse(fechaFin);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
