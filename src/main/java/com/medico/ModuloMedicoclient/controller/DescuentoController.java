@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.medico.ModuloMedicoclient.model.TipoDescuento;
 import com.medico.ModuloMedicoclient.repository.DescuentoRepo;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @RestController
 @RequestMapping("/descuento")
@@ -23,20 +22,17 @@ public class DescuentoController {
 	private DescuentoRepo repositorio;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@HystrixCommand
 	public List<TipoDescuento> getDescuentoPersona(@PathVariable("id") int id) {
 		return this.repositorio.getDescuentoPersona(id);
 	}
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@HystrixCommand
 	public TipoDescuento setDescuentoPersona(@RequestBody TipoDescuento newbeneficio) {
 		repositorio.getInactivos(newbeneficio.getFdiPersona().getId());
 		return this.repositorio.save(newbeneficio);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@HystrixCommand
 	public TipoDescuento setPutDescuentoPersona(@RequestBody TipoDescuento editbeneficio) {
 		return this.repositorio.save(editbeneficio);
 	}

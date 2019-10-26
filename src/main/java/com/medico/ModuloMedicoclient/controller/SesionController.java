@@ -19,7 +19,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.medico.ModuloMedicoclient.model.Sesion;
 import com.medico.ModuloMedicoclient.repository.SesionRepo;
 import com.medico.ModuloMedicoclient.serializer.Perfiles;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 
 @RestController
@@ -31,7 +30,6 @@ public class SesionController {
 	
 	@JsonView(Perfiles.PublicView.class)
 	@RequestMapping(value="/finicio/{fechaIni}/fin/{fechaFin}",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@HystrixCommand
 	public List<Sesion> getDescuentoPersona(@PathVariable("fechaIni") String fechaIni, @PathVariable("fechaFin") String fechaFin) {
 		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 		Date f1=null;
@@ -50,20 +48,17 @@ public class SesionController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@HystrixCommand
 	public List<Sesion> getDescuentoPersona(@PathVariable("id") int id) {
 		return this.repositorio.getTerapiaByDiagnostico(id);
 	}
 	
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@HystrixCommand
 	public Sesion addFisioterapiaByPersona(@RequestBody Sesion newbeneficio) {
 		return this.repositorio.save(newbeneficio);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT, consumes=MediaType.APPLICATION_JSON_VALUE)
-	@HystrixCommand
 	public Sesion setPutDescuentoPersona(@RequestBody Sesion editbeneficio) {
 	return this.repositorio.save(editbeneficio);
 	}

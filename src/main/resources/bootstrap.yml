@@ -1,6 +1,0 @@
-spring:
-  application:
-    name: medico
-  cloud:
-    config:
-      uri: https://config-server-app.herokuapp.com/

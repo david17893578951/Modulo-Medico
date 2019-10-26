@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.medico.ModuloMedicoclient.model.Persona;
 import com.medico.ModuloMedicoclient.repository.PersonaRepo;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-
 
 @RestController
 @RequestMapping("/persona")
@@ -24,34 +22,27 @@ public class PersonaController {
 	@Autowired
 	private PersonaRepo repositorioPersona;
 	
-	@RequestMapping(value="/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@HystrixCommand
-	public Optional<Persona> getPersonaId (@PathVariable("id") Integer id) {
-		return this.repositorioPersona.findById(id); 
-	}
-	
-	
-
-	@RequestMapping(value = "/find/{cedula}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@HystrixCommand
-	public List<Persona> getPersonabyCedula(@PathVariable("cedula") String cedula) {
-		return this.repositorioPersona.getPersonabyCedula(cedula);
-	}
-	
 	@RequestMapping(method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@HystrixCommand
 	public List<Persona> getAllPersona() {
 		return this.repositorioPersona.findAll();
 	}
 	
+	@RequestMapping(value="/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public Optional<Persona> getPersonaId (@PathVariable("id") Integer id) {
+		return this.repositorioPersona.findById(id); 
+	}
+
+	@RequestMapping(value = "/find/{cedula}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public List<Persona> getPersonabyCedula(@PathVariable("cedula") String cedula) {
+		return this.repositorioPersona.getPersonabyCedula(cedula);
+	}
+	
 	@RequestMapping(method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
-	@HystrixCommand
 	public Persona setPersona(@RequestBody Persona Persona) {
 	return this.repositorioPersona.save(Persona);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT, consumes=MediaType.APPLICATION_JSON_VALUE)
-	@HystrixCommand
 	public Persona setpersonal(@RequestBody Persona Persona) {
 	return this.repositorioPersona.save(Persona);
 	}

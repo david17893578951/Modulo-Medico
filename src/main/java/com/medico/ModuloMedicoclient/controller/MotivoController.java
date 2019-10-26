@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.medico.ModuloMedicoclient.model.Motivo;
 import com.medico.ModuloMedicoclient.repository.MotivoRepo;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @RestController
 @RequestMapping("/motivo")
@@ -23,13 +22,11 @@ public class MotivoController {
 	private MotivoRepo repositorio;
 
 	@RequestMapping(method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@HystrixCommand
 	public List<Motivo> getAllPersona() {
 		return this.repositorio.findAll();
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@HystrixCommand
 	public Motivo addFisioterapiaByPersona(@RequestBody Motivo newbeneficio) {
 		return this.repositorio.save(newbeneficio);
 	}

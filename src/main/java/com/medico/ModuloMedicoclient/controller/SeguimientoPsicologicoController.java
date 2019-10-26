@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.medico.ModuloMedicoclient.model.SeguimientoPsicologico;
 import com.medico.ModuloMedicoclient.repository.SeguimientoPsicologicoRepo;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @RestController
 @RequestMapping("/psicologico")
@@ -23,19 +22,16 @@ public class SeguimientoPsicologicoController {
 	private SeguimientoPsicologicoRepo repositorio;
 		
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@HystrixCommand
 	public List<SeguimientoPsicologico> getDescuentoPersona(@PathVariable("id") int id) {
 		return this.repositorio.getSeguimientoByPersona(id);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@HystrixCommand
 	public SeguimientoPsicologico addFisioterapiaByPersona(@RequestBody SeguimientoPsicologico newbeneficio) {
 		repositorio.getInactivos(newbeneficio.getFdiPersona().getId());
 		return this.repositorio.save(newbeneficio);
 	}
 	@RequestMapping(method = RequestMethod.PUT, consumes=MediaType.APPLICATION_JSON_VALUE)
-	@HystrixCommand
 	public SeguimientoPsicologico setPutDescuentoPersona(@RequestBody SeguimientoPsicologico editbeneficio) {
 	return this.repositorio.save(editbeneficio);
 	}
