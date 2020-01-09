@@ -2,7 +2,6 @@ package com.medico.ModuloMedicoclient.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -21,19 +20,15 @@ public class EdDeportistaEntrenador implements Serializable {
 	@Column(name="id_dep_entre")
 	private Integer idDepEntre;
 
-	//bi-directional many-to-one association to FdiDeportista
+	//uni-directional many-to-one association to FdiDeportista
 	@ManyToOne
 	@JoinColumn(name="depor_id")
 	private FdiDeportista fdiDeportista;
 
-	//bi-directional many-to-one association to FdiEntrenador
+	//uni-directional many-to-one association to FdiEntrenador
 	@ManyToOne
 	@JoinColumn(name="entre_id")
 	private FdiEntrenador fdiEntrenador;
-
-	//bi-directional many-to-one association to TestDeportista
-	@OneToMany(mappedBy="edDeportistaEntrenador")
-	private List<TestDeportista> testDeportistas;
 
 	public EdDeportistaEntrenador() {
 	}
@@ -60,28 +55,6 @@ public class EdDeportistaEntrenador implements Serializable {
 
 	public void setFdiEntrenador(FdiEntrenador fdiEntrenador) {
 		this.fdiEntrenador = fdiEntrenador;
-	}
-
-	public List<TestDeportista> getTestDeportistas() {
-		return this.testDeportistas;
-	}
-
-	public void setTestDeportistas(List<TestDeportista> testDeportistas) {
-		this.testDeportistas = testDeportistas;
-	}
-
-	public TestDeportista addTestDeportista(TestDeportista testDeportista) {
-		getTestDeportistas().add(testDeportista);
-		testDeportista.setEdDeportistaEntrenador(this);
-
-		return testDeportista;
-	}
-
-	public TestDeportista removeTestDeportista(TestDeportista testDeportista) {
-		getTestDeportistas().remove(testDeportista);
-		testDeportista.setEdDeportistaEntrenador(null);
-
-		return testDeportista;
 	}
 
 }

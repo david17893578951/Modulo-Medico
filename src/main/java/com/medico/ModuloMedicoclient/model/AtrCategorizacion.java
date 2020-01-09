@@ -24,12 +24,12 @@ public class AtrCategorizacion implements Serializable {
 	@Column(name="categoriza_valorcapta")
 	private BigDecimal categorizaValorcapta;
 
-	//bi-directional many-to-one association to AtrDisciplinascomparativa
+	//uni-directional many-to-one association to AtrDisciplinascomparativa
 	@ManyToOne
 	@JoinColumn(name="discomp_id")
 	private AtrDisciplinascomparativa atrDisciplinascomparativa;
 
-	//bi-directional many-to-one association to AtrSomatotipo
+	//uni-directional many-to-one association to AtrSomatotipo
 	@ManyToOne
 	@JoinColumn(name="somato_id")
 	private AtrSomatotipo atrSomatotipo;

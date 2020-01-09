@@ -22,12 +22,12 @@ public class FdiUsersRole implements Serializable {
 
 	private String clave;
 
-	//bi-directional many-to-one association to Persona
+	//uni-directional many-to-one association to Persona
 	@ManyToOne
 	@JoinColumn(name="prs_id")
 	private Persona fdiPersona;
 
-	//bi-directional many-to-one association to FdiRol
+	//uni-directional many-to-one association to FdiRol
 	@ManyToOne
 	@JoinColumn(name="rol_id")
 	private FdiRol fdiRol;

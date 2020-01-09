@@ -2,7 +2,6 @@ package com.medico.ModuloMedicoclient.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -24,10 +23,6 @@ public class EdCamposEntrenamiento implements Serializable {
 	@Column(name="campentre_nombre")
 	private String campentreNombre;
 
-	//bi-directional many-to-one association to FdiDisciplina
-	@OneToMany(mappedBy="edCamposEntrenamiento")
-	private List<FdiDisciplina> fdiDisciplinas;
-
 	public EdCamposEntrenamiento() {
 	}
 
@@ -45,28 +40,6 @@ public class EdCamposEntrenamiento implements Serializable {
 
 	public void setCampentreNombre(String campentreNombre) {
 		this.campentreNombre = campentreNombre;
-	}
-
-	public List<FdiDisciplina> getFdiDisciplinas() {
-		return this.fdiDisciplinas;
-	}
-
-	public void setFdiDisciplinas(List<FdiDisciplina> fdiDisciplinas) {
-		this.fdiDisciplinas = fdiDisciplinas;
-	}
-
-	public FdiDisciplina addFdiDisciplina(FdiDisciplina fdiDisciplina) {
-		getFdiDisciplinas().add(fdiDisciplina);
-		fdiDisciplina.setEdCamposEntrenamiento(this);
-
-		return fdiDisciplina;
-	}
-
-	public FdiDisciplina removeFdiDisciplina(FdiDisciplina fdiDisciplina) {
-		getFdiDisciplinas().remove(fdiDisciplina);
-		fdiDisciplina.setEdCamposEntrenamiento(null);
-
-		return fdiDisciplina;
 	}
 
 }

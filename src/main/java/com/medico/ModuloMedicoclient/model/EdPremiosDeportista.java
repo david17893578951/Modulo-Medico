@@ -29,12 +29,12 @@ public class EdPremiosDeportista implements Serializable {
 	@Column(name="m_plata")
 	private Integer mPlata;
 
-	//bi-directional many-to-one association to Competencia
+	//uni-directional many-to-one association to Competencia
 	@ManyToOne
 	@JoinColumn(name="id_competencia")
 	private Competencia competencia;
 
-	//bi-directional many-to-one association to FdiDeportista
+	//uni-directional many-to-one association to FdiDeportista
 	@ManyToOne
 	@JoinColumn(name="depor_id")
 	private FdiDeportista fdiDeportista;

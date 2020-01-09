@@ -3,11 +3,8 @@ package com.medico.ModuloMedicoclient.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.medico.ModuloMedicoclient.serializer.Perfiles;
-
-import java.util.List;
 
 
 /**
@@ -26,36 +23,16 @@ public class FdiCategoriaDisciplina implements Serializable {
 	@Column(name="catdisci_id")
 	private Integer catdisciId;
 
-	//bi-directional many-to-one association to AtrDisciplinascomparativa
-	@OneToMany(mappedBy="fdiCategoriaDisciplina")
-	@JsonIgnore
-	private List<AtrDisciplinascomparativa> atrDisciplinascomparativas;
-
-	//bi-directional many-to-one association to EdControlAsistencia
-	@OneToMany(mappedBy="fdiCategoriaDisciplina")
-	@JsonIgnore
-	private List<EdControlAsistencia> edControlAsistencias;
-
-	//bi-directional many-to-one association to FdiCategoria
+	//uni-directional many-to-one association to FdiCategoria
 	@ManyToOne
 	@JoinColumn(name="categoria_id")
 	private FdiCategoria fdiCategoria;
 
-	//bi-directional many-to-one association to FdiDisciplina
+	//uni-directional many-to-one association to FdiDisciplina
 	@ManyToOne
 	@JoinColumn(name="disciplina_id")
 	@JsonView(Perfiles.PublicView.class)
 	private FdiDisciplina fdiDisciplina;
-
-	//bi-directional many-to-one association to FdiDeportista
-	@OneToMany(mappedBy="fdiCategoriaDisciplina")
-	@JsonIgnore
-	private List<FdiDeportista> fdiDeportistas;
-
-	//bi-directional many-to-one association to FdiEntrenador
-	@OneToMany(mappedBy="fdiCategoriaDisciplina")
-	@JsonIgnore
-	private List<FdiEntrenador> fdiEntrenadors;
 
 	public FdiCategoriaDisciplina() {
 	}
@@ -66,50 +43,6 @@ public class FdiCategoriaDisciplina implements Serializable {
 
 	public void setCatdisciId(Integer catdisciId) {
 		this.catdisciId = catdisciId;
-	}
-
-	public List<AtrDisciplinascomparativa> getAtrDisciplinascomparativas() {
-		return this.atrDisciplinascomparativas;
-	}
-
-	public void setAtrDisciplinascomparativas(List<AtrDisciplinascomparativa> atrDisciplinascomparativas) {
-		this.atrDisciplinascomparativas = atrDisciplinascomparativas;
-	}
-
-	public AtrDisciplinascomparativa addAtrDisciplinascomparativa(AtrDisciplinascomparativa atrDisciplinascomparativa) {
-		getAtrDisciplinascomparativas().add(atrDisciplinascomparativa);
-		atrDisciplinascomparativa.setFdiCategoriaDisciplina(this);
-
-		return atrDisciplinascomparativa;
-	}
-
-	public AtrDisciplinascomparativa removeAtrDisciplinascomparativa(AtrDisciplinascomparativa atrDisciplinascomparativa) {
-		getAtrDisciplinascomparativas().remove(atrDisciplinascomparativa);
-		atrDisciplinascomparativa.setFdiCategoriaDisciplina(null);
-
-		return atrDisciplinascomparativa;
-	}
-
-	public List<EdControlAsistencia> getEdControlAsistencias() {
-		return this.edControlAsistencias;
-	}
-
-	public void setEdControlAsistencias(List<EdControlAsistencia> edControlAsistencias) {
-		this.edControlAsistencias = edControlAsistencias;
-	}
-
-	public EdControlAsistencia addEdControlAsistencia(EdControlAsistencia edControlAsistencia) {
-		getEdControlAsistencias().add(edControlAsistencia);
-		edControlAsistencia.setFdiCategoriaDisciplina(this);
-
-		return edControlAsistencia;
-	}
-
-	public EdControlAsistencia removeEdControlAsistencia(EdControlAsistencia edControlAsistencia) {
-		getEdControlAsistencias().remove(edControlAsistencia);
-		edControlAsistencia.setFdiCategoriaDisciplina(null);
-
-		return edControlAsistencia;
 	}
 
 	public FdiCategoria getFdiCategoria() {
@@ -126,50 +59,6 @@ public class FdiCategoriaDisciplina implements Serializable {
 
 	public void setFdiDisciplina(FdiDisciplina fdiDisciplina) {
 		this.fdiDisciplina = fdiDisciplina;
-	}
-
-	public List<FdiDeportista> getFdiDeportistas() {
-		return this.fdiDeportistas;
-	}
-
-	public void setFdiDeportistas(List<FdiDeportista> fdiDeportistas) {
-		this.fdiDeportistas = fdiDeportistas;
-	}
-
-	public FdiDeportista addFdiDeportista(FdiDeportista fdiDeportista) {
-		getFdiDeportistas().add(fdiDeportista);
-		fdiDeportista.setFdiCategoriaDisciplina(this);
-
-		return fdiDeportista;
-	}
-
-	public FdiDeportista removeFdiDeportista(FdiDeportista fdiDeportista) {
-		getFdiDeportistas().remove(fdiDeportista);
-		fdiDeportista.setFdiCategoriaDisciplina(null);
-
-		return fdiDeportista;
-	}
-
-	public List<FdiEntrenador> getFdiEntrenadors() {
-		return this.fdiEntrenadors;
-	}
-
-	public void setFdiEntrenadors(List<FdiEntrenador> fdiEntrenadors) {
-		this.fdiEntrenadors = fdiEntrenadors;
-	}
-
-	public FdiEntrenador addFdiEntrenador(FdiEntrenador fdiEntrenador) {
-		getFdiEntrenadors().add(fdiEntrenador);
-		fdiEntrenador.setFdiCategoriaDisciplina(this);
-
-		return fdiEntrenador;
-	}
-
-	public FdiEntrenador removeFdiEntrenador(FdiEntrenador fdiEntrenador) {
-		getFdiEntrenadors().remove(fdiEntrenador);
-		fdiEntrenador.setFdiCategoriaDisciplina(null);
-
-		return fdiEntrenador;
 	}
 
 }

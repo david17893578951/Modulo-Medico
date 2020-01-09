@@ -4,7 +4,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -163,32 +162,20 @@ public class AtrPlanillamedida implements Serializable {
 	@Column(name="planilla_trocanterea_caja")
 	private BigDecimal planillaTrocantereaCaja;
 
-	//bi-directional many-to-one association to AtrFraccionamiento
-	@OneToMany(mappedBy="atrPlanillamedida")
-	private List<AtrFraccionamiento> atrFraccionamientos;
-
-	//bi-directional many-to-one association to FdiDeportista
+	//uni-directional many-to-one association to FdiDeportista
 	@ManyToOne
 	@JoinColumn(name="depor_id")
 	private FdiDeportista fdiDeportista;
 
-	//bi-directional many-to-one association to FdiEntrenador
+	//uni-directional many-to-one association to FdiEntrenador
 	@ManyToOne
 	@JoinColumn(name="entre_id")
 	private FdiEntrenador fdiEntrenador1;
 
-	//bi-directional many-to-one association to FdiEntrenador
+	//uni-directional many-to-one association to FdiEntrenador
 	@ManyToOne
 	@JoinColumn(name="fdi_entre_id")
 	private FdiEntrenador fdiEntrenador2;
-
-	//bi-directional many-to-one association to AtrProporcionalidadphantom
-	@OneToMany(mappedBy="atrPlanillamedida")
-	private List<AtrProporcionalidadphantom> atrProporcionalidadphantoms;
-
-	//bi-directional many-to-one association to AtrSomatotipo
-	@OneToMany(mappedBy="atrPlanillamedida")
-	private List<AtrSomatotipo> atrSomatotipos;
 
 	public AtrPlanillamedida() {
 	}
@@ -569,28 +556,6 @@ public class AtrPlanillamedida implements Serializable {
 		this.planillaTrocantereaCaja = planillaTrocantereaCaja;
 	}
 
-	public List<AtrFraccionamiento> getAtrFraccionamientos() {
-		return this.atrFraccionamientos;
-	}
-
-	public void setAtrFraccionamientos(List<AtrFraccionamiento> atrFraccionamientos) {
-		this.atrFraccionamientos = atrFraccionamientos;
-	}
-
-	public AtrFraccionamiento addAtrFraccionamiento(AtrFraccionamiento atrFraccionamiento) {
-		getAtrFraccionamientos().add(atrFraccionamiento);
-		atrFraccionamiento.setAtrPlanillamedida(this);
-
-		return atrFraccionamiento;
-	}
-
-	public AtrFraccionamiento removeAtrFraccionamiento(AtrFraccionamiento atrFraccionamiento) {
-		getAtrFraccionamientos().remove(atrFraccionamiento);
-		atrFraccionamiento.setAtrPlanillamedida(null);
-
-		return atrFraccionamiento;
-	}
-
 	public FdiDeportista getFdiDeportista() {
 		return this.fdiDeportista;
 	}
@@ -613,50 +578,6 @@ public class AtrPlanillamedida implements Serializable {
 
 	public void setFdiEntrenador2(FdiEntrenador fdiEntrenador2) {
 		this.fdiEntrenador2 = fdiEntrenador2;
-	}
-
-	public List<AtrProporcionalidadphantom> getAtrProporcionalidadphantoms() {
-		return this.atrProporcionalidadphantoms;
-	}
-
-	public void setAtrProporcionalidadphantoms(List<AtrProporcionalidadphantom> atrProporcionalidadphantoms) {
-		this.atrProporcionalidadphantoms = atrProporcionalidadphantoms;
-	}
-
-	public AtrProporcionalidadphantom addAtrProporcionalidadphantom(AtrProporcionalidadphantom atrProporcionalidadphantom) {
-		getAtrProporcionalidadphantoms().add(atrProporcionalidadphantom);
-		atrProporcionalidadphantom.setAtrPlanillamedida(this);
-
-		return atrProporcionalidadphantom;
-	}
-
-	public AtrProporcionalidadphantom removeAtrProporcionalidadphantom(AtrProporcionalidadphantom atrProporcionalidadphantom) {
-		getAtrProporcionalidadphantoms().remove(atrProporcionalidadphantom);
-		atrProporcionalidadphantom.setAtrPlanillamedida(null);
-
-		return atrProporcionalidadphantom;
-	}
-
-	public List<AtrSomatotipo> getAtrSomatotipos() {
-		return this.atrSomatotipos;
-	}
-
-	public void setAtrSomatotipos(List<AtrSomatotipo> atrSomatotipos) {
-		this.atrSomatotipos = atrSomatotipos;
-	}
-
-	public AtrSomatotipo addAtrSomatotipo(AtrSomatotipo atrSomatotipo) {
-		getAtrSomatotipos().add(atrSomatotipo);
-		atrSomatotipo.setAtrPlanillamedida(this);
-
-		return atrSomatotipo;
-	}
-
-	public AtrSomatotipo removeAtrSomatotipo(AtrSomatotipo atrSomatotipo) {
-		getAtrSomatotipos().remove(atrSomatotipo);
-		atrSomatotipo.setAtrPlanillamedida(null);
-
-		return atrSomatotipo;
 	}
 
 }

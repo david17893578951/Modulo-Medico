@@ -3,7 +3,6 @@ package com.medico.ModuloMedicoclient.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 
 /**
@@ -37,11 +36,7 @@ public class AtrDisciplinascomparativa implements Serializable {
 	@Column(name="discomp_mesomorfo")
 	private BigDecimal discompMesomorfo;
 
-	//bi-directional many-to-one association to AtrCategorizacion
-	@OneToMany(mappedBy="atrDisciplinascomparativa")
-	private List<AtrCategorizacion> atrCategorizacions;
-
-	//bi-directional many-to-one association to FdiCategoriaDisciplina
+	//uni-directional many-to-one association to FdiCategoriaDisciplina
 	@ManyToOne
 	@JoinColumn(name="catdisci_id")
 	private FdiCategoriaDisciplina fdiCategoriaDisciplina;
@@ -95,28 +90,6 @@ public class AtrDisciplinascomparativa implements Serializable {
 
 	public void setDiscompMesomorfo(BigDecimal discompMesomorfo) {
 		this.discompMesomorfo = discompMesomorfo;
-	}
-
-	public List<AtrCategorizacion> getAtrCategorizacions() {
-		return this.atrCategorizacions;
-	}
-
-	public void setAtrCategorizacions(List<AtrCategorizacion> atrCategorizacions) {
-		this.atrCategorizacions = atrCategorizacions;
-	}
-
-	public AtrCategorizacion addAtrCategorizacion(AtrCategorizacion atrCategorizacion) {
-		getAtrCategorizacions().add(atrCategorizacion);
-		atrCategorizacion.setAtrDisciplinascomparativa(this);
-
-		return atrCategorizacion;
-	}
-
-	public AtrCategorizacion removeAtrCategorizacion(AtrCategorizacion atrCategorizacion) {
-		getAtrCategorizacions().remove(atrCategorizacion);
-		atrCategorizacion.setAtrDisciplinascomparativa(null);
-
-		return atrCategorizacion;
 	}
 
 	public FdiCategoriaDisciplina getFdiCategoriaDisciplina() {

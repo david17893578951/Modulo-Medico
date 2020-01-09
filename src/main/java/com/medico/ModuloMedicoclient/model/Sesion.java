@@ -2,10 +2,6 @@ package com.medico.ModuloMedicoclient.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonView;
-import com.medico.ModuloMedicoclient.serializer.Perfiles;
-
 import java.util.Date;
 
 
@@ -23,15 +19,13 @@ public class Sesion implements Serializable {
 	@SequenceGenerator(name="PSG_SESION_ID_GENERATOR", sequenceName="PSG_SESION_SSN_ID_SEQ",allocationSize=1,initialValue=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PSG_SESION_ID_GENERATOR")
 	@Column(name="ssn_id")
-	@JsonView(Perfiles.PublicView.class)
 	private Integer id;
 
 	@Column(name="sgp_conclusion")
-	@JsonView(Perfiles.PublicView.class)
 	private String conclusion;
-	
+
+	@Temporal(TemporalType.DATE)
 	@Column(name="sgp_fecha")
-	@JsonView(Perfiles.PublicView.class)
 	private Date fecha;
 
 	@Column(name="sgp_numsesionactual")
@@ -46,7 +40,6 @@ public class Sesion implements Serializable {
 	//uni-directional many-to-one association to SeguimientoPsicologico
 	@ManyToOne
 	@JoinColumn(name="sgp_id")
-	@JsonView(Perfiles.PublicView.class)
 	private SeguimientoPsicologico psgSeguimientoPsicologico;
 
 	public Sesion() {

@@ -2,7 +2,6 @@ package com.medico.ModuloMedicoclient.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -23,14 +22,10 @@ public class Canton implements Serializable {
 	@Column(name="dpa_descanton")
 	private String dpaDescanton;
 
-	//bi-directional many-to-one association to Provincia
+	//uni-directional many-to-one association to Provincia
 	@ManyToOne
 	@JoinColumn(name="dpa_provincia")
 	private Provincia provincia;
-
-	//bi-directional many-to-one association to Parroquia
-	@OneToMany(mappedBy="canton")
-	private List<Parroquia> parroquias;
 
 	public Canton() {
 	}
@@ -57,28 +52,6 @@ public class Canton implements Serializable {
 
 	public void setProvincia(Provincia provincia) {
 		this.provincia = provincia;
-	}
-
-	public List<Parroquia> getParroquias() {
-		return this.parroquias;
-	}
-
-	public void setParroquias(List<Parroquia> parroquias) {
-		this.parroquias = parroquias;
-	}
-
-	public Parroquia addParroquia(Parroquia parroquia) {
-		getParroquias().add(parroquia);
-		parroquia.setCanton(this);
-
-		return parroquia;
-	}
-
-	public Parroquia removeParroquia(Parroquia parroquia) {
-		getParroquias().remove(parroquia);
-		parroquia.setCanton(null);
-
-		return parroquia;
 	}
 
 }

@@ -3,7 +3,6 @@ package com.medico.ModuloMedicoclient.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.medico.ModuloMedicoclient.serializer.Perfiles;
 
@@ -50,7 +49,6 @@ public class SeguimientoFisioterapia implements Serializable {
 	//uni-directional many-to-one association to Persona
 	@ManyToOne
 	@JoinColumn(name="prs_id")
-	@JsonIgnoreProperties(value= {"parroquiaBean","fdiUsersRoles"})
 	@JsonView(Perfiles.PublicView.class)
 	private Persona fdiPersona;
 

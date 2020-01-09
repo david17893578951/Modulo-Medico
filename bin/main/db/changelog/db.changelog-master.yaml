@@ -1,4 +1,7 @@
-databaseChangeLog: 
+databaseChangeLog:
     - include :
         file: classpath:/db/changelog/sql/2018-08-10_esquema_database.sql
+        relativeToChangelogFile: false
+    - include :
+        file: classpath:/db/changelog/sql/2018-08-11_datos_catagolo.sql
         relativeToChangelogFile: false

@@ -3,7 +3,8 @@ package com.medico.ModuloMedicoclient.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.medico.ModuloMedicoclient.serializer.Perfiles;
 
@@ -43,7 +44,7 @@ public class Persona implements Serializable {
 	private String correo;
 
 	@Column(name="prs_dir_recidencia")
-	private String recidencia;
+	private String dirRecidencia;
 
 	@Column(name="prs_discapacidad")
 	private Boolean discapacidad;
@@ -99,27 +100,12 @@ public class Persona implements Serializable {
 	private String tipodiscapacidad;
 
 	//bi-directional many-to-one association to FdiDeportista
-	@OneToMany(mappedBy="fdiPersona")
+	@JsonManagedReference
+	@OneToMany(mappedBy="fdiPersona", fetch=FetchType.EAGER)
 	@JsonView(Perfiles.PublicView.class)
-	//@JsonIgnoreProperties(value= {"asistencias","atrPlanillamedidas","edDeportistaEntrenadors","edPremiosDeportistas","fdiPersona"})
+	@JsonIgnoreProperties(value= {"fdiPersona"}, allowGetters=true)
 	private List<FdiDeportista> fdiDeportistas;
-
-	//bi-directional many-to-one association to FdiEntrenador
-	@OneToMany(mappedBy="fdiPersona")
-	@JsonIgnore
-	private List<FdiEntrenador> fdiEntrenadors;
-
-	//bi-directional many-to-one association to Parroquia
-	@ManyToOne
-	@JoinColumn(name="dpa_parr")
-	@JsonIgnore
-	private Parroquia parroquiaBean;
-
-	//bi-directional many-to-one association to FdiUsersRole
-	@OneToMany(mappedBy="fdiPersona")
-	@JsonIgnore
-	private List<FdiUsersRole> fdiUsersRoles;
-
+	
 	public Persona() {
 	}
 
@@ -163,12 +149,12 @@ public class Persona implements Serializable {
 		this.correo = correo;
 	}
 
-	public String getRecidencia() {
-		return this.recidencia;
+	public String getDirRecidencia() {
+		return this.dirRecidencia;
 	}
 
-	public void setRecidencia(String recidencia) {
-		this.recidencia = recidencia;
+	public void setDirRecidencia(String dirRecidencia) {
+		this.dirRecidencia = dirRecidencia;
 	}
 
 	public Boolean getDiscapacidad() {
@@ -305,80 +291,6 @@ public class Persona implements Serializable {
 
 	public void setTipodiscapacidad(String tipodiscapacidad) {
 		this.tipodiscapacidad = tipodiscapacidad;
-	}
-
-	public List<FdiDeportista> getFdiDeportistas() {
-		return this.fdiDeportistas;
-	}
-
-	public void setFdiDeportistas(List<FdiDeportista> fdiDeportistas) {
-		this.fdiDeportistas = fdiDeportistas;
-	}
-
-	public FdiDeportista addFdiDeportista(FdiDeportista fdiDeportista) {
-		getFdiDeportistas().add(fdiDeportista);
-		fdiDeportista.setFdiPersona(this);
-
-		return fdiDeportista;
-	}
-
-	public FdiDeportista removeFdiDeportista(FdiDeportista fdiDeportista) {
-		getFdiDeportistas().remove(fdiDeportista);
-		fdiDeportista.setFdiPersona(null);
-
-		return fdiDeportista;
-	}
-
-	public List<FdiEntrenador> getFdiEntrenadors() {
-		return this.fdiEntrenadors;
-	}
-
-	public void setFdiEntrenadors(List<FdiEntrenador> fdiEntrenadors) {
-		this.fdiEntrenadors = fdiEntrenadors;
-	}
-
-	public FdiEntrenador addFdiEntrenador(FdiEntrenador fdiEntrenador) {
-		getFdiEntrenadors().add(fdiEntrenador);
-		fdiEntrenador.setFdiPersona(this);
-
-		return fdiEntrenador;
-	}
-
-	public FdiEntrenador removeFdiEntrenador(FdiEntrenador fdiEntrenador) {
-		getFdiEntrenadors().remove(fdiEntrenador);
-		fdiEntrenador.setFdiPersona(null);
-
-		return fdiEntrenador;
-	}
-
-	public Parroquia getParroquiaBean() {
-		return this.parroquiaBean;
-	}
-
-	public void setParroquiaBean(Parroquia parroquiaBean) {
-		this.parroquiaBean = parroquiaBean;
-	}
-
-	public List<FdiUsersRole> getFdiUsersRoles() {
-		return this.fdiUsersRoles;
-	}
-
-	public void setFdiUsersRoles(List<FdiUsersRole> fdiUsersRoles) {
-		this.fdiUsersRoles = fdiUsersRoles;
-	}
-
-	public FdiUsersRole addFdiUsersRole(FdiUsersRole fdiUsersRole) {
-		getFdiUsersRoles().add(fdiUsersRole);
-		fdiUsersRole.setFdiPersona(this);
-
-		return fdiUsersRole;
-	}
-
-	public FdiUsersRole removeFdiUsersRole(FdiUsersRole fdiUsersRole) {
-		getFdiUsersRoles().remove(fdiUsersRole);
-		fdiUsersRole.setFdiPersona(null);
-
-		return fdiUsersRole;
 	}
 
 }

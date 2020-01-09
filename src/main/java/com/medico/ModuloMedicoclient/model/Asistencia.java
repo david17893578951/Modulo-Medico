@@ -3,7 +3,6 @@ package com.medico.ModuloMedicoclient.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -30,14 +29,10 @@ public class Asistencia implements Serializable {
 
 	private String observaciones;
 
-	//bi-directional many-to-one association to FdiDeportista
+	//uni-directional many-to-one association to FdiDeportista
 	@ManyToOne
 	@JoinColumn(name="depor_id")
 	private FdiDeportista fdiDeportista;
-
-	//bi-directional many-to-one association to EdControlAsistencia
-	@OneToMany(mappedBy="asistencia")
-	private List<EdControlAsistencia> edControlAsistencias;
 
 	public Asistencia() {
 	}
@@ -88,28 +83,6 @@ public class Asistencia implements Serializable {
 
 	public void setFdiDeportista(FdiDeportista fdiDeportista) {
 		this.fdiDeportista = fdiDeportista;
-	}
-
-	public List<EdControlAsistencia> getEdControlAsistencias() {
-		return this.edControlAsistencias;
-	}
-
-	public void setEdControlAsistencias(List<EdControlAsistencia> edControlAsistencias) {
-		this.edControlAsistencias = edControlAsistencias;
-	}
-
-	public EdControlAsistencia addEdControlAsistencia(EdControlAsistencia edControlAsistencia) {
-		getEdControlAsistencias().add(edControlAsistencia);
-		edControlAsistencia.setAsistencia(this);
-
-		return edControlAsistencia;
-	}
-
-	public EdControlAsistencia removeEdControlAsistencia(EdControlAsistencia edControlAsistencia) {
-		getEdControlAsistencias().remove(edControlAsistencia);
-		edControlAsistencia.setAsistencia(null);
-
-		return edControlAsistencia;
 	}
 
 }

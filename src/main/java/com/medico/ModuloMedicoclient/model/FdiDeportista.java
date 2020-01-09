@@ -3,112 +3,92 @@ package com.medico.ModuloMedicoclient.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.medico.ModuloMedicoclient.serializer.Perfiles;
 
 import java.math.BigDecimal;
-import java.util.List;
-
 
 /**
  * The persistent class for the fdi_deportistas database table.
  * 
  */
 @Entity
-@Table(name="fdi_deportistas")
-@NamedQuery(name="FdiDeportista.findAll", query="SELECT f FROM FdiDeportista f")
+@Table(name = "fdi_deportistas")
+@NamedQuery(name = "FdiDeportista.findAll", query = "SELECT f FROM FdiDeportista f")
 public class FdiDeportista implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="FDI_DEPORTISTAS_DEPORID_GENERATOR" )
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="FDI_DEPORTISTAS_DEPORID_GENERATOR")
-	@Column(name="depor_id")
+	@SequenceGenerator(name = "FDI_DEPORTISTAS_DEPORID_GENERATOR")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FDI_DEPORTISTAS_DEPORID_GENERATOR")
+	@Column(name = "depor_id")
 	@JsonView(Perfiles.PublicView.class)
 	private Integer deporId;
 
-	@Column(name="deport_baja_dificultad")
+	@Column(name = "deport_baja_dificultad")
 	private String deportBajaDificultad;
 
-	@Column(name="deport_baja_medidas_tomadas")
+	@Column(name = "deport_baja_medidas_tomadas")
 	private String deportBajaMedidasTomadas;
 
-	@Column(name="deport_baja_motivo_baja")
+	@Column(name = "deport_baja_motivo_baja")
 	private String deportBajaMotivoBaja;
 
-	@Column(name="deport_baja_observacion")
+	@Column(name = "deport_baja_observacion")
 	private String deportBajaObservacion;
 
-	@Column(name="deport_baja_recomendacion")
+	@Column(name = "deport_baja_recomendacion")
 	private String deportBajaRecomendacion;
 
-	@Column(name="deport_baja_tiempo_area")
+	@Column(name = "deport_baja_tiempo_area")
 	private String deportBajaTiempoArea;
 
-	@Column(name="deport_calzado")
+	@Column(name = "deport_calzado")
 	private BigDecimal deportCalzado;
 
-	@Column(name="deport_divisprueba")
+	@Column(name = "deport_divisprueba")
 	private String deportDivisprueba;
 
-	@Column(name="deport_estado")
+	@Column(name = "deport_estado")
 	private Boolean deportEstado;
 
-	@Column(name="deport_estratosocial")
+	@Column(name = "deport_estratosocial")
 	private String deportEstratosocial;
 
-	@Column(name="deport_foto")
+	@Column(name = "deport_foto")
 	private String deportFoto;
 
-	@Column(name="deport_fotocedula")
+	@Column(name = "deport_fotocedula")
 	private String deportFotocedula;
 
-	@Column(name="deport_instieducativa")
+	@Column(name = "deport_instieducativa")
 	private String deportInstieducativa;
 
-	@Column(name="deport_niveleducativo")
+	@Column(name = "deport_niveleducativo")
 	private String deportNiveleducativo;
 
-	@Column(name="deport_nrohermanos")
+	@Column(name = "deport_nrohermanos")
 	private Integer deportNrohermanos;
 
-	@Column(name="deport_tallaunif")
+	@Column(name = "deport_tallaunif")
 	private String deportTallaunif;
 
-	@Column(name="deport_tipodeport")
+	@Column(name = "deport_tipodeport")
 	private String deportTipodeport;
 
-	//bi-directional many-to-one association to Asistencia
-	@OneToMany(mappedBy="fdiDeportista")
-	@JsonIgnore
-	private List<Asistencia> asistencias;
-
-	//bi-directional many-to-one association to AtrPlanillamedida
-	@OneToMany(mappedBy="fdiDeportista")
-	@JsonIgnore
-	private List<AtrPlanillamedida> atrPlanillamedidas;
-
-	//bi-directional many-to-one association to EdDeportistaEntrenador
-	@OneToMany(mappedBy="fdiDeportista")
-	@JsonIgnore
-	private List<EdDeportistaEntrenador> edDeportistaEntrenadors;
-
-	//bi-directional many-to-one association to EdPremiosDeportista
-	@OneToMany(mappedBy="fdiDeportista")
-	@JsonIgnore
-	private List<EdPremiosDeportista> edPremiosDeportistas;
-
-	//bi-directional many-to-one association to FdiCategoriaDisciplina
+	// uni-directional many-to-one association to FdiCategoriaDisciplina
 	@ManyToOne
-	@JoinColumn(name="catdisci_id")
+	@JoinColumn(name = "catdisci_id")
 	@JsonView(Perfiles.PublicView.class)
 	private FdiCategoriaDisciplina fdiCategoriaDisciplina;
 
-	//bi-directional many-to-one association to Persona
-	@ManyToOne
-	@JoinColumn(name="prs_id")
-	@JsonIgnore
+	// uni-directional many-to-one association to Persona
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "prs_id")
+	@JsonIgnoreProperties(value = { "fdiDeportistas" })
 	private Persona fdiPersona;
 
 	public FdiDeportista() {
@@ -256,94 +236,6 @@ public class FdiDeportista implements Serializable {
 
 	public void setDeportTipodeport(String deportTipodeport) {
 		this.deportTipodeport = deportTipodeport;
-	}
-
-	public List<Asistencia> getAsistencias() {
-		return this.asistencias;
-	}
-
-	public void setAsistencias(List<Asistencia> asistencias) {
-		this.asistencias = asistencias;
-	}
-
-	public Asistencia addAsistencia(Asistencia asistencia) {
-		getAsistencias().add(asistencia);
-		asistencia.setFdiDeportista(this);
-
-		return asistencia;
-	}
-
-	public Asistencia removeAsistencia(Asistencia asistencia) {
-		getAsistencias().remove(asistencia);
-		asistencia.setFdiDeportista(null);
-
-		return asistencia;
-	}
-
-	public List<AtrPlanillamedida> getAtrPlanillamedidas() {
-		return this.atrPlanillamedidas;
-	}
-
-	public void setAtrPlanillamedidas(List<AtrPlanillamedida> atrPlanillamedidas) {
-		this.atrPlanillamedidas = atrPlanillamedidas;
-	}
-
-	public AtrPlanillamedida addAtrPlanillamedida(AtrPlanillamedida atrPlanillamedida) {
-		getAtrPlanillamedidas().add(atrPlanillamedida);
-		atrPlanillamedida.setFdiDeportista(this);
-
-		return atrPlanillamedida;
-	}
-
-	public AtrPlanillamedida removeAtrPlanillamedida(AtrPlanillamedida atrPlanillamedida) {
-		getAtrPlanillamedidas().remove(atrPlanillamedida);
-		atrPlanillamedida.setFdiDeportista(null);
-
-		return atrPlanillamedida;
-	}
-
-	public List<EdDeportistaEntrenador> getEdDeportistaEntrenadors() {
-		return this.edDeportistaEntrenadors;
-	}
-
-	public void setEdDeportistaEntrenadors(List<EdDeportistaEntrenador> edDeportistaEntrenadors) {
-		this.edDeportistaEntrenadors = edDeportistaEntrenadors;
-	}
-
-	public EdDeportistaEntrenador addEdDeportistaEntrenador(EdDeportistaEntrenador edDeportistaEntrenador) {
-		getEdDeportistaEntrenadors().add(edDeportistaEntrenador);
-		edDeportistaEntrenador.setFdiDeportista(this);
-
-		return edDeportistaEntrenador;
-	}
-
-	public EdDeportistaEntrenador removeEdDeportistaEntrenador(EdDeportistaEntrenador edDeportistaEntrenador) {
-		getEdDeportistaEntrenadors().remove(edDeportistaEntrenador);
-		edDeportistaEntrenador.setFdiDeportista(null);
-
-		return edDeportistaEntrenador;
-	}
-
-	public List<EdPremiosDeportista> getEdPremiosDeportistas() {
-		return this.edPremiosDeportistas;
-	}
-
-	public void setEdPremiosDeportistas(List<EdPremiosDeportista> edPremiosDeportistas) {
-		this.edPremiosDeportistas = edPremiosDeportistas;
-	}
-
-	public EdPremiosDeportista addEdPremiosDeportista(EdPremiosDeportista edPremiosDeportista) {
-		getEdPremiosDeportistas().add(edPremiosDeportista);
-		edPremiosDeportista.setFdiDeportista(this);
-
-		return edPremiosDeportista;
-	}
-
-	public EdPremiosDeportista removeEdPremiosDeportista(EdPremiosDeportista edPremiosDeportista) {
-		getEdPremiosDeportistas().remove(edPremiosDeportista);
-		edPremiosDeportista.setFdiDeportista(null);
-
-		return edPremiosDeportista;
 	}
 
 	public FdiCategoriaDisciplina getFdiCategoriaDisciplina() {

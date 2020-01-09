@@ -3,7 +3,6 @@ package com.medico.ModuloMedicoclient.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -36,10 +35,6 @@ public class Competencia implements Serializable {
 	private String nombreCompetencia;
 
 	private String sexo;
-
-	//bi-directional many-to-one association to EdPremiosDeportista
-	@OneToMany(mappedBy="competencia")
-	private List<EdPremiosDeportista> edPremiosDeportistas;
 
 	public Competencia() {
 	}
@@ -90,28 +85,6 @@ public class Competencia implements Serializable {
 
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
-	}
-
-	public List<EdPremiosDeportista> getEdPremiosDeportistas() {
-		return this.edPremiosDeportistas;
-	}
-
-	public void setEdPremiosDeportistas(List<EdPremiosDeportista> edPremiosDeportistas) {
-		this.edPremiosDeportistas = edPremiosDeportistas;
-	}
-
-	public EdPremiosDeportista addEdPremiosDeportista(EdPremiosDeportista edPremiosDeportista) {
-		getEdPremiosDeportistas().add(edPremiosDeportista);
-		edPremiosDeportista.setCompetencia(this);
-
-		return edPremiosDeportista;
-	}
-
-	public EdPremiosDeportista removeEdPremiosDeportista(EdPremiosDeportista edPremiosDeportista) {
-		getEdPremiosDeportistas().remove(edPremiosDeportista);
-		edPremiosDeportista.setCompetencia(null);
-
-		return edPremiosDeportista;
 	}
 
 }

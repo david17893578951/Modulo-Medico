@@ -128,7 +128,7 @@ public class AtrProporcionalidadphantom implements Serializable {
 	@Column(name="trocanterea_caja")
 	private BigDecimal trocantereaCaja;
 
-	//bi-directional many-to-one association to AtrPlanillamedida
+	//uni-directional many-to-one association to AtrPlanillamedida
 	@ManyToOne
 	@JoinColumn(name="planilla_id")
 	private AtrPlanillamedida atrPlanillamedida;

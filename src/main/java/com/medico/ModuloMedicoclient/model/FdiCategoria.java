@@ -3,10 +3,6 @@ package com.medico.ModuloMedicoclient.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.util.List;
-
 
 /**
  * The persistent class for the fdi_categoria database table.
@@ -29,11 +25,6 @@ public class FdiCategoria implements Serializable {
 
 	@Column(name="categoria_nombre")
 	private String categoriaNombre;
-
-	//bi-directional many-to-one association to FdiCategoriaDisciplina
-	@OneToMany(mappedBy="fdiCategoria")
-	@JsonIgnore
-	private List<FdiCategoriaDisciplina> fdiCategoriaDisciplinas;
 
 	public FdiCategoria() {
 	}
@@ -60,28 +51,6 @@ public class FdiCategoria implements Serializable {
 
 	public void setCategoriaNombre(String categoriaNombre) {
 		this.categoriaNombre = categoriaNombre;
-	}
-
-	public List<FdiCategoriaDisciplina> getFdiCategoriaDisciplinas() {
-		return this.fdiCategoriaDisciplinas;
-	}
-
-	public void setFdiCategoriaDisciplinas(List<FdiCategoriaDisciplina> fdiCategoriaDisciplinas) {
-		this.fdiCategoriaDisciplinas = fdiCategoriaDisciplinas;
-	}
-
-	public FdiCategoriaDisciplina addFdiCategoriaDisciplina(FdiCategoriaDisciplina fdiCategoriaDisciplina) {
-		getFdiCategoriaDisciplinas().add(fdiCategoriaDisciplina);
-		fdiCategoriaDisciplina.setFdiCategoria(this);
-
-		return fdiCategoriaDisciplina;
-	}
-
-	public FdiCategoriaDisciplina removeFdiCategoriaDisciplina(FdiCategoriaDisciplina fdiCategoriaDisciplina) {
-		getFdiCategoriaDisciplinas().remove(fdiCategoriaDisciplina);
-		fdiCategoriaDisciplina.setFdiCategoria(null);
-
-		return fdiCategoriaDisciplina;
 	}
 
 }

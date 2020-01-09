@@ -3,7 +3,6 @@ package com.medico.ModuloMedicoclient.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 
 /**
@@ -112,14 +111,10 @@ public class AtrFraccionamiento implements Serializable {
 	@Column(name="fraccio_zresidual")
 	private BigDecimal fraccioZresidual;
 
-	//bi-directional many-to-one association to AtrPlanillamedida
+	//uni-directional many-to-one association to AtrPlanillamedida
 	@ManyToOne
 	@JoinColumn(name="planilla_id")
 	private AtrPlanillamedida atrPlanillamedida;
-
-	//bi-directional many-to-one association to AtrIndiceestadosalud
-	@OneToMany(mappedBy="atrFraccionamiento")
-	private List<AtrIndiceestadosalud> atrIndiceestadosaluds;
 
 	public AtrFraccionamiento() {
 	}
@@ -378,28 +373,6 @@ public class AtrFraccionamiento implements Serializable {
 
 	public void setAtrPlanillamedida(AtrPlanillamedida atrPlanillamedida) {
 		this.atrPlanillamedida = atrPlanillamedida;
-	}
-
-	public List<AtrIndiceestadosalud> getAtrIndiceestadosaluds() {
-		return this.atrIndiceestadosaluds;
-	}
-
-	public void setAtrIndiceestadosaluds(List<AtrIndiceestadosalud> atrIndiceestadosaluds) {
-		this.atrIndiceestadosaluds = atrIndiceestadosaluds;
-	}
-
-	public AtrIndiceestadosalud addAtrIndiceestadosalud(AtrIndiceestadosalud atrIndiceestadosalud) {
-		getAtrIndiceestadosaluds().add(atrIndiceestadosalud);
-		atrIndiceestadosalud.setAtrFraccionamiento(this);
-
-		return atrIndiceestadosalud;
-	}
-
-	public AtrIndiceestadosalud removeAtrIndiceestadosalud(AtrIndiceestadosalud atrIndiceestadosalud) {
-		getAtrIndiceestadosaluds().remove(atrIndiceestadosalud);
-		atrIndiceestadosalud.setAtrFraccionamiento(null);
-
-		return atrIndiceestadosalud;
 	}
 
 }

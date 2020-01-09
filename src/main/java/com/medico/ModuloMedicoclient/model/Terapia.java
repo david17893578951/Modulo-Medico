@@ -50,6 +50,7 @@ public class Terapia implements Serializable {
 	@Column(name="ttm_estiramientob")
 	private Boolean estiramientob;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name="ttm_fecha")
 	@JsonView(Perfiles.PublicView.class)
 	private Date fecha;

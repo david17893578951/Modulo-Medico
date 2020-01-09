@@ -30,19 +30,26 @@ ext {
 }
 
 dependencies {
+	compile('org.springframework.boot:spring-boot-starter-data-rest')
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'  	 	
 	implementation 'org.liquibase:liquibase-core'
-	//implementation 'org.springframework.cloud:spring-cloud-starter-config'
-	//implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-	//implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
-	//implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix-dashboard'
-	//implementation 'io.pivotal.spring.cloud:spring-cloud-services-starter-circuit-breaker'
+	compile group: 'org.apache.tomcat', name: 'tomcat-jdbc', version: '9.0.27'
+	compile group: 'com.zaxxer', name: 'HikariCP', version: '3.4.1'
+	implementation 'org.springframework.cloud:spring-cloud-starter-config'
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+	compile group: 'net.bull.javamelody', name: 'javamelody-spring-boot-starter', version: '1.80.0'
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix-dashboard'
+	implementation 'io.pivotal.spring.cloud:spring-cloud-services-starter-circuit-breaker'
+	compile 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate4:2.4.4'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-properties', version: '2.10.1'
 	runtimeOnly 'org.postgresql:postgresql'
-	annotationProcessor 'org.projectlombok:lombok'
+	//annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

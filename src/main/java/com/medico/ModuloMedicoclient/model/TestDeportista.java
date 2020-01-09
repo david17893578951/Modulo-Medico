@@ -52,7 +52,7 @@ public class TestDeportista implements Serializable {
 
 	private String toma5;
 
-	//bi-directional many-to-one association to EdDeportistaEntrenador
+	//uni-directional many-to-one association to EdDeportistaEntrenador
 	@ManyToOne
 	@JoinColumn(name="id_dep_entre")
 	private EdDeportistaEntrenador edDeportistaEntrenador;

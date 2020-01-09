@@ -3,11 +3,8 @@ package com.medico.ModuloMedicoclient.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.medico.ModuloMedicoclient.serializer.Perfiles;
-
-import java.util.List;
 
 
 /**
@@ -31,15 +28,9 @@ public class FdiDisciplina implements Serializable {
 	@JsonView(Perfiles.PublicView.class)
 	private String disciplinaNombre;
 
-	//bi-directional many-to-one association to FdiCategoriaDisciplina
-	@OneToMany(mappedBy="fdiDisciplina")
-	@JsonIgnore
-	private List<FdiCategoriaDisciplina> fdiCategoriaDisciplinas;
-
-	//bi-directional many-to-one association to EdCamposEntrenamiento
+	//uni-directional many-to-one association to EdCamposEntrenamiento
 	@ManyToOne
 	@JoinColumn(name="campentre_id")
-	@JsonIgnore
 	private EdCamposEntrenamiento edCamposEntrenamiento;
 
 	public FdiDisciplina() {
@@ -59,28 +50,6 @@ public class FdiDisciplina implements Serializable {
 
 	public void setDisciplinaNombre(String disciplinaNombre) {
 		this.disciplinaNombre = disciplinaNombre;
-	}
-
-	public List<FdiCategoriaDisciplina> getFdiCategoriaDisciplinas() {
-		return this.fdiCategoriaDisciplinas;
-	}
-
-	public void setFdiCategoriaDisciplinas(List<FdiCategoriaDisciplina> fdiCategoriaDisciplinas) {
-		this.fdiCategoriaDisciplinas = fdiCategoriaDisciplinas;
-	}
-
-	public FdiCategoriaDisciplina addFdiCategoriaDisciplina(FdiCategoriaDisciplina fdiCategoriaDisciplina) {
-		getFdiCategoriaDisciplinas().add(fdiCategoriaDisciplina);
-		fdiCategoriaDisciplina.setFdiDisciplina(this);
-
-		return fdiCategoriaDisciplina;
-	}
-
-	public FdiCategoriaDisciplina removeFdiCategoriaDisciplina(FdiCategoriaDisciplina fdiCategoriaDisciplina) {
-		getFdiCategoriaDisciplinas().remove(fdiCategoriaDisciplina);
-		fdiCategoriaDisciplina.setFdiDisciplina(null);
-
-		return fdiCategoriaDisciplina;
 	}
 
 	public EdCamposEntrenamiento getEdCamposEntrenamiento() {

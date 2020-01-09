@@ -111,7 +111,7 @@ public class AtrIndiceestadosalud implements Serializable {
 	@Column(name="indi_mushue_clf")
 	private String indiMushueClf;
 
-	//bi-directional many-to-one association to AtrFraccionamiento
+	//uni-directional many-to-one association to AtrFraccionamiento
 	@ManyToOne
 	@JoinColumn(name="fraccio_id")
 	private AtrFraccionamiento atrFraccionamiento;

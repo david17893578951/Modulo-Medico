@@ -2,7 +2,6 @@ package com.medico.ModuloMedicoclient.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -23,10 +22,6 @@ public class Provincia implements Serializable {
 	@Column(name="dpa_desprov")
 	private String dpaDesprov;
 
-	//bi-directional many-to-one association to Canton
-	@OneToMany(mappedBy="provincia")
-	private List<Canton> cantons;
-
 	public Provincia() {
 	}
 
@@ -44,28 +39,6 @@ public class Provincia implements Serializable {
 
 	public void setDpaDesprov(String dpaDesprov) {
 		this.dpaDesprov = dpaDesprov;
-	}
-
-	public List<Canton> getCantons() {
-		return this.cantons;
-	}
-
-	public void setCantons(List<Canton> cantons) {
-		this.cantons = cantons;
-	}
-
-	public Canton addCanton(Canton canton) {
-		getCantons().add(canton);
-		canton.setProvincia(this);
-
-		return canton;
-	}
-
-	public Canton removeCanton(Canton canton) {
-		getCantons().remove(canton);
-		canton.setProvincia(null);
-
-		return canton;
 	}
 
 }

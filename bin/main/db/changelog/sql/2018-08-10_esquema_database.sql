@@ -573,7 +573,6 @@ ENTRE_ID
 /*==============================================================*/
 create table FDI_PERSONA (
    PRS_ID               SERIAL               not null,
-   DPA_PARR             VARCHAR(10)          null,
    PRS_CEDULA           VARCHAR(15)          not null,
    PRS_NOMBRE           VARCHAR(50)          null,
    PRS_APELLIDO         VARCHAR(50)          null,
@@ -1477,11 +1476,6 @@ alter table FDI_ENTRENADOR
 alter table FDI_ENTRENADOR
    add constraint FK_FDI_ENTR_RF_FDI_EN_FDI_PERS foreign key (PRS_ID)
       references FDI_PERSONA (PRS_ID)
-      on delete restrict on update restrict;
-
-alter table FDI_PERSONA
-   add constraint FK_FDI_PERS_RF_FDI_PE_PARROQUI foreign key (DPA_PARR)
-      references PARROQUIA (DPA_PARR)
       on delete restrict on update restrict;
 
 alter table FDI_USERS_ROLES

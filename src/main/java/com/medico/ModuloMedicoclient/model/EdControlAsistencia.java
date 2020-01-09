@@ -26,12 +26,12 @@ public class EdControlAsistencia implements Serializable {
 
 	private String mes;
 
-	//bi-directional many-to-one association to Asistencia
+	//uni-directional many-to-one association to Asistencia
 	@ManyToOne
 	@JoinColumn(name="id_asistencia")
 	private Asistencia asistencia;
 
-	//bi-directional many-to-one association to FdiCategoriaDisciplina
+	//uni-directional many-to-one association to FdiCategoriaDisciplina
 	@ManyToOne
 	@JoinColumn(name="catdisci_id")
 	private FdiCategoriaDisciplina fdiCategoriaDisciplina;

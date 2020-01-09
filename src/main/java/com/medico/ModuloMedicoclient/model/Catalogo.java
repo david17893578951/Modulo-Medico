@@ -15,7 +15,7 @@ public class Catalogo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="MDC_CATALOGO_ID_GENERATOR", sequenceName="MDC_CATALOGO_CAT_ID_SEQ")
+	@SequenceGenerator(name="MDC_CATALOGO_ID_GENERATOR", sequenceName="MDC_CATALOGO_CAT_ID_SEQ",allocationSize=1,initialValue=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="MDC_CATALOGO_ID_GENERATOR")
 	@Column(name="cat_id")
 	private Integer id;

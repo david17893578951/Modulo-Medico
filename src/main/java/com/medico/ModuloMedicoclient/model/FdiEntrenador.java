@@ -2,7 +2,6 @@ package com.medico.ModuloMedicoclient.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -30,24 +29,12 @@ public class FdiEntrenador implements Serializable {
 	@Column(name="entre_foto_cedula")
 	private String entreFotoCedula;
 
-	//bi-directional many-to-one association to AtrPlanillamedida
-	@OneToMany(mappedBy="fdiEntrenador1")
-	private List<AtrPlanillamedida> atrPlanillamedidas1;
-
-	//bi-directional many-to-one association to AtrPlanillamedida
-	@OneToMany(mappedBy="fdiEntrenador2")
-	private List<AtrPlanillamedida> atrPlanillamedidas2;
-
-	//bi-directional many-to-one association to EdDeportistaEntrenador
-	@OneToMany(mappedBy="fdiEntrenador")
-	private List<EdDeportistaEntrenador> edDeportistaEntrenadors;
-
-	//bi-directional many-to-one association to FdiCategoriaDisciplina
+	//uni-directional many-to-one association to FdiCategoriaDisciplina
 	@ManyToOne
 	@JoinColumn(name="catdisci_id")
 	private FdiCategoriaDisciplina fdiCategoriaDisciplina;
 
-	//bi-directional many-to-one association to Persona
+	//uni-directional many-to-one association to Persona
 	@ManyToOne
 	@JoinColumn(name="prs_id")
 	private Persona fdiPersona;
@@ -85,72 +72,6 @@ public class FdiEntrenador implements Serializable {
 
 	public void setEntreFotoCedula(String entreFotoCedula) {
 		this.entreFotoCedula = entreFotoCedula;
-	}
-
-	public List<AtrPlanillamedida> getAtrPlanillamedidas1() {
-		return this.atrPlanillamedidas1;
-	}
-
-	public void setAtrPlanillamedidas1(List<AtrPlanillamedida> atrPlanillamedidas1) {
-		this.atrPlanillamedidas1 = atrPlanillamedidas1;
-	}
-
-	public AtrPlanillamedida addAtrPlanillamedidas1(AtrPlanillamedida atrPlanillamedidas1) {
-		getAtrPlanillamedidas1().add(atrPlanillamedidas1);
-		atrPlanillamedidas1.setFdiEntrenador1(this);
-
-		return atrPlanillamedidas1;
-	}
-
-	public AtrPlanillamedida removeAtrPlanillamedidas1(AtrPlanillamedida atrPlanillamedidas1) {
-		getAtrPlanillamedidas1().remove(atrPlanillamedidas1);
-		atrPlanillamedidas1.setFdiEntrenador1(null);
-
-		return atrPlanillamedidas1;
-	}
-
-	public List<AtrPlanillamedida> getAtrPlanillamedidas2() {
-		return this.atrPlanillamedidas2;
-	}
-
-	public void setAtrPlanillamedidas2(List<AtrPlanillamedida> atrPlanillamedidas2) {
-		this.atrPlanillamedidas2 = atrPlanillamedidas2;
-	}
-
-	public AtrPlanillamedida addAtrPlanillamedidas2(AtrPlanillamedida atrPlanillamedidas2) {
-		getAtrPlanillamedidas2().add(atrPlanillamedidas2);
-		atrPlanillamedidas2.setFdiEntrenador2(this);
-
-		return atrPlanillamedidas2;
-	}
-
-	public AtrPlanillamedida removeAtrPlanillamedidas2(AtrPlanillamedida atrPlanillamedidas2) {
-		getAtrPlanillamedidas2().remove(atrPlanillamedidas2);
-		atrPlanillamedidas2.setFdiEntrenador2(null);
-
-		return atrPlanillamedidas2;
-	}
-
-	public List<EdDeportistaEntrenador> getEdDeportistaEntrenadors() {
-		return this.edDeportistaEntrenadors;
-	}
-
-	public void setEdDeportistaEntrenadors(List<EdDeportistaEntrenador> edDeportistaEntrenadors) {
-		this.edDeportistaEntrenadors = edDeportistaEntrenadors;
-	}
-
-	public EdDeportistaEntrenador addEdDeportistaEntrenador(EdDeportistaEntrenador edDeportistaEntrenador) {
-		getEdDeportistaEntrenadors().add(edDeportistaEntrenador);
-		edDeportistaEntrenador.setFdiEntrenador(this);
-
-		return edDeportistaEntrenador;
-	}
-
-	public EdDeportistaEntrenador removeEdDeportistaEntrenador(EdDeportistaEntrenador edDeportistaEntrenador) {
-		getEdDeportistaEntrenadors().remove(edDeportistaEntrenador);
-		edDeportistaEntrenador.setFdiEntrenador(null);
-
-		return edDeportistaEntrenador;
 	}
 
 	public FdiCategoriaDisciplina getFdiCategoriaDisciplina() {

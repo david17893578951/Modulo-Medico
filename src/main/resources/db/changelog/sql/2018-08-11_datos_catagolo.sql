@@ -1,0 +1,14 @@
+INSERT INTO "mdc_catalogo" VALUES (1, 'TBM', 'no', 'TIPO DE BENEFICIO MÉDICO', 'TBM', 'A');
+INSERT INTO "mdc_catalogo" VALUES (2, 'TBMG', 'TBM', 'Médico General', 'TBM1', 'A');
+INSERT INTO "mdc_catalogo" VALUES (3, 'TBMF', 'TBM', 'Fisioterapia', 'TBM2', 'A');
+INSERT INTO "mdc_catalogo" VALUES (4, 'TBMP', 'TBM', 'Psicología', 'TBM3', 'A');
+INSERT INTO "mdc_catalogo" VALUES (5, 'TBMM', 'TBM', 'Medicamentos', 'TBM4', 'A');
+INSERT INTO "mdc_catalogo" VALUES (6, 'TPD', 'no', 'TIPO DE PACIENTE DEL DESCUENTO', 'TPD', 'A');
+INSERT INTO "mdc_catalogo" VALUES (7, 'TPDDS', 'TPD', 'Deportista Seleccionado', 'TPD1', 'A');
+INSERT INTO "mdc_catalogo" VALUES (8, 'TPDDARI', 'TPD', 'Deportista de Alto Rendimiento Imbabura', 'TPD2', 'A');
+INSERT INTO "mdc_catalogo" VALUES (9, 'TPDXD', 'TPD', 'Ex Deportista', 'TPD3', 'A');
+INSERT INTO "mdc_catalogo" VALUES (10, 'TPDF', 'TPD', 'Funcionario de FDI', 'TPD4', 'A');
+INSERT INTO "mdc_catalogo" VALUES (11, 'TPDXD', 'TPD', 'Ex Dirigente de FDI', 'TPD5', 'A');
+INSERT INTO "mdc_catalogo" VALUES (12, 'TPDDAOP', 'TPD', 'Deportista Activo de otras Provincias', 'TPD6', 'A');
+INSERT INTO "mdc_catalogo" VALUES (13, 'TPDDDAP', 'TPD', 'Dirigente Deportivo Activo de la Provincia', 'TPD7', 'A');
+INSERT INTO "mdc_catalogo" VALUES (14, 'TPDP', 'TPD', 'Particulares', 'TPD8', 'A');

@@ -3,7 +3,6 @@ package com.medico.ModuloMedicoclient.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 
 /**
@@ -49,11 +48,7 @@ public class AtrSomatotipo implements Serializable {
 	@Column(name="somato_mesomorfo")
 	private BigDecimal somatoMesomorfo;
 
-	//bi-directional many-to-one association to AtrCategorizacion
-	@OneToMany(mappedBy="atrSomatotipo")
-	private List<AtrCategorizacion> atrCategorizacions;
-
-	//bi-directional many-to-one association to AtrPlanillamedida
+	//uni-directional many-to-one association to AtrPlanillamedida
 	@ManyToOne
 	@JoinColumn(name="planilla_id")
 	private AtrPlanillamedida atrPlanillamedida;
@@ -139,28 +134,6 @@ public class AtrSomatotipo implements Serializable {
 
 	public void setSomatoMesomorfo(BigDecimal somatoMesomorfo) {
 		this.somatoMesomorfo = somatoMesomorfo;
-	}
-
-	public List<AtrCategorizacion> getAtrCategorizacions() {
-		return this.atrCategorizacions;
-	}
-
-	public void setAtrCategorizacions(List<AtrCategorizacion> atrCategorizacions) {
-		this.atrCategorizacions = atrCategorizacions;
-	}
-
-	public AtrCategorizacion addAtrCategorizacion(AtrCategorizacion atrCategorizacion) {
-		getAtrCategorizacions().add(atrCategorizacion);
-		atrCategorizacion.setAtrSomatotipo(this);
-
-		return atrCategorizacion;
-	}
-
-	public AtrCategorizacion removeAtrCategorizacion(AtrCategorizacion atrCategorizacion) {
-		getAtrCategorizacions().remove(atrCategorizacion);
-		atrCategorizacion.setAtrSomatotipo(null);
-
-		return atrCategorizacion;
 	}
 
 	public AtrPlanillamedida getAtrPlanillamedida() {
