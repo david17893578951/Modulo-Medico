@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: Modulo medico
+  cloud:
+    config:
+      uri: https://config-server-app.herokuapp.com/
