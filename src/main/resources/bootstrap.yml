@@ -4,5 +4,3 @@ spring:
       uri: https://config-server-app.herokuapp.com/
   application:
     name: Modulo medico
-server:
-  port: 8085

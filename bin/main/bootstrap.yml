@@ -1,0 +1,8 @@
+server:
+  port: 8085
+spring:
+  cloud:
+    config:
+      uri: https://config-server-app.herokuapp.com/
+  application:
+    name: Modulo medico
